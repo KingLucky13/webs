@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='userStyle.css') }}">
+    <title>Меню</title>
+</head>
+
+<body>
+
+    <!-- Баланс -->
+    <p class="center-text" id="login">Hello,{{login}}</p>
+
+    <table class="border">
+        <tr>
+            <td>Ваш баланс</td>
+            <td id="balance">{{balance}}</td>
+        </tr>
+    </table>
+
+    <!-- Таблица с базовой ценой -->
+    <table class="border">
+        <tr>
+            <td>Базовая цена</td>
+            <td><input type="text" id="price" placeholder="Цена"></td>
+        </tr>
+    </table>
+
+    <button onclick="getPrice(document.getElementById('price'))">Объявить базовую цену</button>
+
+    <!-- Таблица название тип категория -->
+    
+    <form method=" post" id="form-item">
+        <div class="scroll-table">
+            <table id="expanses">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Тип</th>
+                        <th>Категория</th>
+                        <th>Время</th>
+                        <th>Сумма</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td> <input type="text" id='title' placeholder="Название"> </td>
+                        <td> <input type="text" id="type" placeholder="Тип"> </td>
+                        <td> <input type="text" id="category" placeholder="Категория"> </td>
+                        <td> <input type="text" id="time" placeholder=""> </td>
+                        <td> <input type="text" id="sum" placeholder="Сумма"> </td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <div class="scroll-table-body">
+                <table id="data">
+                    <tbody id="table-data">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="center-text">
+            <input type="button" value="Добавить" onclick="addExpanse(document.getElementById('form-item'))">
+        </div>
+
+        </form>
+        <table id="filter">
+            <thead>
+                <tr>
+                    <th>Категория</th>
+                    <th>Время</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> <input type="text" id="categoryFilter" placeholder="Категория"> </td>
+                    <td> <input type="text" id="timeFilter" placeholder=""> </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="center-text">
+            <input type="button" value="Фильтровать" onclick="filter()">
+        </div>
+        <!-- Тут график! ;) -->
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+
+        <div>
+            <button onclick="nowGraph()"> График за текущий месяц</button>
+            <button onclick="monthsGraph()"> График за месяца этого года</button>
+            <button onclick="yearsGraph()"> График за года</button>
+        </div>
+
+        <div>
+            <p>Ваш бюджет в будущем:  <span id="futureBudget"></span></p>
+            <form>
+                <input type="radio" name="futureDate" value="threeMonth" id="threeMonths"  checked> Через три месяца <br>
+                <input type="radio" name="futureDate" value="sixMonth" id="sixMonths"> Через шесть месяцев <br>
+                <input type="radio" name="futureDate" value="Year" > Через год
+                <p><input type="button" onclick=inflation() value="Подтвердить"></p>
+            </form>
+        </div>
+
+        <!-- Тут кнопки всякие для тебя вообщем -->
+        <div class="center-text">
+            <input type="button" onclick="predict()" value="Прогноз будущих расходов">
+        </div>
+
+        <div class="center-text">
+            <input type="button" onclick="exportToCsv()" value="Экспорт в файл">
+        </div>
+
+
+        <!-- Это моё!!! -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script  src="{{ url_for('static', filename='userScript.js') }}"></script>
+        <script type="text/javascript">//передача переменных
+            var login={{login}};
+            var usData={{usData}};
+            var balance={{balance}};
+          // alert(userData[0]);
+           // addItem(data[0][0],data[0][1],new Date(),data[0][3],data[0][4]);
+        </script>
+
+</body>
+
+</html>

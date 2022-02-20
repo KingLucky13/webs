@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru" >
+<head>
+  <meta charset="UTF-8">
+  <title>Веб-приложение</title>
+  <link rel="stylesheet" href ="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="login-page">
+  <div class="form">
+    <form class="login-form" id="log-form" method="post">
+      <input type="text" placeholder="Логин" name = "login">
+      <input type="password" placeholder="Пароль" name = "password">
+      <input type = "submit" value="Готово!">
+      <p class="message">Не зарегистрированы? <input type = "button" onclick = "showReg()" value = "Зарегистрируйтесь!"> </p>
+    </form>
+    <form class="register-form" id = "reg-form" method="post" hidden>
+      <input type="text" placeholder="Логин" name = "reg_login">
+      <input type="password" placeholder="Пароль" name = "reg_password">
+      <input type="text" placeholder="Почта" name = "email">
+      <input type = "submit" value="Готово!">
+      <p class="message">Есть аккаунт? <input type = "button" onclick = "showEnt()" value = "Войти"></p>
+    </form>
+  </div>
+</div>
+<script  src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
